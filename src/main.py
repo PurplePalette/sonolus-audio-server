@@ -32,9 +32,9 @@ async def upload(data: PostConvertParams) -> PostConvertResponse:
             return JSONResponse(content={"status": "not_found"})
     if data.start is not None and data.end is not None:
         if data.end - data.start < 5000:
-            return JSONResponse(content={"message": "Must be at least 5 second"}, status_code=400)
+            return JSONResponse(content={"message": "The audio file must be longer than 5 seconds."}, status_code=400)
         elif data.end - data.start > 30000:
-            return JSONResponse(content={"message": "Too long duration."}, status_code=400)
+            return JSONResponse(content={"message": "The audio file is too long."}, status_code=400)
         time_args = [
             "-ss",
             str(data.start / 1000),
